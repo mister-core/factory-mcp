@@ -1,0 +1,26 @@
+{
+  "name": "factory-mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Read-only MCP gateway that unifies factory systems (MES / PLM / OA / data warehouse) behind one process, one connection pool per source, and 24 agent tools",
+  "main": "server.mjs",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.mjs",
+    "selftest": "node selftest.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "manufacturing",
+    "mes",
+    "iiot",
+    "read-only",
+    "mysql",
+    "factory-automation"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "mysql2": "^3.11.0"
+  }
+}

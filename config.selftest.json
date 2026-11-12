@@ -1,0 +1,33 @@
+{
+  "_comment": "Config for the end-to-end self-test: points at a throwaway MySQL 5.7 on localhost:3308. The MES endpoint is deliberately unreachable — that is what verifies 'readable error, process keeps running'.",
+  "systems": {
+    "mes": {
+      "enabled": true,
+      "base": "http://10.255.255.1:4100",
+      "userCode": "selftest",
+      "password": "selftest",
+      "orgCode": "200"
+    },
+    "mysql": [
+      {
+        "id": "central",
+        "label": "local selftest db mcp_selftest",
+        "enabled": true,
+        "host": "127.0.0.1",
+        "port": 3308,
+        "user": "root",
+        "password": "",
+        "database": "mcp_selftest",
+        "connectionLimit": 2,
+        "maxExecutionTimeMs": 8000,
+        "maxRows": 100
+      }
+    ],
+    "dcs_http": {
+      "_comment": "Points at services that are not running here; the self-test only checks tool registration, never calls them.",
+      "enabled": true,
+      "server_url": "http://10.255.255.1:5001",
+      "trace_url": "http://10.255.255.1:5002"
+    }
+  }
+}

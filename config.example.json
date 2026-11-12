@@ -1,0 +1,49 @@
+{
+  "_comment": "Copy this to config.json and fill in your own endpoints. config.json holds credentials — it is gitignored, never commit it.",
+  "systems": {
+    "mes": {
+      "_comment": "U9 Smart Factory (MEAN stack: Node + Express + MongoDB + AngularJS). Read-only client in lib/u9_client.mjs. The AES key/IV used for signin are constants baked into the vendor's frontend bundle — see README, section 'Adapting to another U9 deployment'.",
+      "enabled": true,
+      "base": "http://10.0.0.10:4100",
+      "userCode": "YOUR_USER_CODE",
+      "password": "YOUR_PASSWORD",
+      "orgCode": "200"
+    },
+    "mysql": [
+      {
+        "id": "central",
+        "label": "Central data-acquisition warehouse",
+        "enabled": true,
+        "host": "10.0.0.20",
+        "port": 3306,
+        "user": "readonly_user",
+        "password": "YOUR_DB_PASSWORD",
+        "database": "factory_data",
+        "connectionLimit": 4,
+        "maxExecutionTimeMs": 15000,
+        "maxRows": 2000,
+        "denyTables": ["upload_state", "upload_fail"]
+      },
+      {
+        "_comment": "Template for a PLM / OA database (Oracle / SQL Server need a different driver and provider, see README)",
+        "id": "plm",
+        "label": "PLM database",
+        "enabled": false,
+        "host": "10.0.0.30",
+        "port": 3306,
+        "user": "readonly_user",
+        "password": "YOUR_DB_PASSWORD",
+        "database": "plm",
+        "connectionLimit": 2,
+        "denyTables": []
+      }
+    ],
+    "dcs_http": {
+      "_comment": "Services that already exist and expose HTTP — forwarding to them means the MCP server never holds the warehouse password.",
+      "enabled": true,
+      "server_url": "http://10.0.0.20:5001",
+      "trace_url": "http://10.0.0.20:5002",
+      "timeout_ms": 30000
+    }
+  }
+}
